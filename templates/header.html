@@ -1,0 +1,18 @@
+## -*- coding: utf-8 -*-
+
+<html lang="es">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="/static/index.css"/>
+		<link rel="Shortcut Icon" type="image/x-icon" href="/static/ugr.jpg"/>
+		<title>Página Principal</title>
+	</head>
+	<body>
+		<section id="cabecera">
+			<img id="logo" src="/static/logo.png" alt="Logo" />
+			<header>Página Principal</header>
+			<p id="subtitulo">Página de prueba para DAI</p>
+			% if usuario:
+				<p id="formu">Bienvenido <b>${usuario}</b> </p>
+			% endif
+

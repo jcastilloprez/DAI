@@ -1,0 +1,30 @@
+## -*- coding: utf-8 -*-
+
+<%include file="header.html"/> 
+
+			% if mensaje:
+				<span id="mensaje"> ${mensaje} </span>
+			% endif
+
+			<form id="for" method="post">
+				${form.render()}
+			</form>
+		</section>
+		<section id="rows1">
+			<p id="tit">Menú de páginas: </p>
+			<ul>
+				<li><a class="seccion" href="/hello">Hola Mundo</a></li><br>
+				<li><a class="seccion" href="/mia">Página con contenido estático</a></li><br>
+				<li><a class="seccion" href="/index">Formulario de bienvenida</a></li><br>
+				<li><a class="seccion" href="/fractal">Conjunto de Mandelbrot</a></li>
+			</ul>
+		</section>
+		<section id="rows2">
+			<p id="vacio"> </p>
+		</section>
+		<footer>
+			<p>Nombre del autor: <em>José Manuel Castillo Pérez</em></p>
+			<p>Esta página está registrada bajo licencia GNU GENERAL PUBLIC LICENSE Version 3</p>
+		</footer>
+</body>
+</html>

@@ -1,0 +1,178 @@
+## -*- coding: utf-8 -*-
+
+<%include file="header.html"/> 
+
+			<p id="formu"><a class="regis" href="/logout"><input type="button" value="Cerrar sesión"/></a></p>
+		</section>
+		<section id="rows1">
+			<p id="tit">Menú de páginas: </p>
+			<ul>
+				<li><a class="seccion" href="/insercion">Registrar usuario</a></li><br>
+				<li><a class="seccion" href="/datos">Visualizar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/modificar">Modificar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/rss">RSS</a></li><br>
+				<li><a class="seccion" href="/registro">Página Inicial</a></li><br>
+				<li><a class="seccion" href="/charts">Insertar datos para la gráfica</a></li><br>
+				<li><a class="seccion" href="/mostrarcharts">Mostrar datos de la gráfica</a></li><br>
+				<li><a class="seccion" href="/twitter">Twitter</a></li><br>
+				<li><a class="seccion" href="/mashup">Mashup</a></li>
+			</ul>
+			<p id="tit">Historial: </p>
+			<ul>
+				<li><a class="seccion" href="${sesion1}">Última página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion2}">Penúltima página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion3}">Antepenúltima página visitada</a></li>
+			</ul>
+		</section>
+		<section id="rows2">
+    		<script type="text/javascript" 
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC__yeJVFnv9B1DdtiHE06Dc3LV0_G5Yr0&sensor=true"></script>
+			<script type="text/javascript">
+			  var map;
+			  var geocoder;
+			  var centerChangedLast;
+			  var reverseGeocodedLast;
+			  var currentReverseGeocodeResponse;
+
+			  function initialize() {
+				 var latlng = new google.maps.LatLng(32.5468,-23.2031);
+				 var myOptions = {
+					zoom: 3,
+					center: latlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				 };
+				 map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+				 geocoder = new google.maps.Geocoder();
+				 setupEvents();
+				 centerChanged();
+			  }
+
+			  function setupEvents() {
+				 reverseGeocodedLast = new Date();
+				 centerChangedLast = new Date();
+
+				 setInterval(function() {
+					if((new Date()).getSeconds() - centerChangedLast.getSeconds() > 1) {
+					  if(reverseGeocodedLast.getTime() < centerChangedLast.getTime())
+						 reverseGeocode();
+					}
+				 }, 1000);
+
+				 google.maps.event.addListener(map, 'zoom_changed', function() {
+					document.getElementById("zoom_level").innerHTML = map.getZoom();
+				 });
+
+				 google.maps.event.addListener(map, 'center_changed', centerChanged);
+
+				 google.maps.event.addDomListener(document.getElementById('crosshair'),'dblclick', function() {
+					 map.setZoom(map.getZoom() + 1);
+				 });
+
+			  }
+
+			  function getCenterLatLngText() {
+				 return '(' + map.getCenter().lat() +', '+ map.getCenter().lng() +')';
+			  }
+
+			  function centerChanged() {
+				 centerChangedLast = new Date();
+				 var latlng = getCenterLatLngText();
+				 var lat = map.getCenter().lat();
+				 var lng = map.getCenter().lng();
+				 document.getElementById('lat').innerHTML = lat;
+				 document.getElementById('lng').innerHTML = lng;
+				 document.getElementById('formatedAddress').innerHTML = '';
+				 currentReverseGeocodeResponse = null;
+			  }
+
+			  function reverseGeocode() {
+				 reverseGeocodedLast = new Date();
+				 geocoder.geocode({latLng:map.getCenter()},reverseGeocodeResult);
+			  }
+
+			  function reverseGeocodeResult(results, status) {
+				 currentReverseGeocodeResponse = results;
+				 if(status == 'OK') {
+					if(results.length == 0) {
+					  document.getElementById('formatedAddress').innerHTML = 'None';
+					} else {
+					  document.getElementById('formatedAddress').innerHTML = results[0].formatted_address;
+					}
+				 } else {
+					document.getElementById('formatedAddress').innerHTML = 'Error';
+				 }
+			  }
+
+			  function geocode() {
+				 var address = document.getElementById("address").value;
+				 geocoder.geocode({
+					'address': address,
+					'partialmatch': true}, geocodeResult);
+			  }
+
+			  function geocodeResult(results, status) {
+				 if (status == 'OK' && results.length > 0) {
+					map.fitBounds(results[0].geometry.viewport);
+				 } else {
+					alert("El lugar que has introducido no existe");
+				 }
+			  }
+
+			  function addMarkerAtCenter() {
+				 var marker = new google.maps.Marker({
+					  position: map.getCenter(),
+					  map: map
+				 });
+
+				 var text = 'Latitud/Longitud: ' + getCenterLatLngText();
+				 if(currentReverseGeocodeResponse) {
+					var addr = '';
+					if(currentReverseGeocodeResponse.size == 0) {
+					  addr = 'None';
+					} else {
+					  addr = currentReverseGeocodeResponse[0].formatted_address;
+					}
+					text = text + '<br>' + 'Dirección: <br>' + addr;
+				 }
+
+				 var infowindow = new google.maps.InfoWindow({ content: text });
+
+				 google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map,marker);
+				 });
+			  }
+			</script>
+
+			<div id="map">
+				 <div id="map_canvas"></div>
+
+				 <div class="form">
+					  <p><input type="text" id="address" placeholder="Escribe aquí tu lugar..." value="" class="input"> <input type="button" value="Buscar" onclick="geocode()" class="button"> <input type="button" value="Insertar marcador" onclick="addMarkerAtCenter()" class="button"></p>
+
+				 </div>
+				 <div class="coordinates">
+					<em class="lat">Latitud</em>
+					<em class="lon">Longitud</em>
+					<span id="lat"></span>
+					<span id="lng"></span>
+				 </div>
+				 <div class="address">
+					<span id="formatedAddress">-</span>
+				 </div>
+				 <span id="zoom_level"></span>
+			</div>
+
+			<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+
+			<script>
+			$(document).ready(function(){
+			  initialize();
+			});
+			</script>
+		</section>
+		<footer>
+			<p>Nombre del autor: <em>José Manuel Castillo Pérez</em></p>
+			<p>Esta página está registrada bajo licencia GNU GENERAL PUBLIC LICENSE Version 3</p>
+		</footer>
+	</body>
+</html>

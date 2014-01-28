@@ -1,0 +1,43 @@
+## -*- coding: utf-8 -*-
+
+<%include file="header.html"/> 
+
+			<p id="formu"><a class="regis" href="/logout"><input type="button" value="Cerrar sesión"/></a></p>
+		</section>
+		<section id="rows1">
+			<p id="tit">Menú de páginas: </p>
+			<ul>
+				<li><a class="seccion" href="/insercion">Registrar usuario</a></li><br>
+				<li><a class="seccion" href="/registro">Página Inicial</a></li><br>
+				<li><a class="seccion" href="/modificar">Modificar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/rss">RSS</a></li><br>
+				<li><a class="seccion" href="/maps">Maps</a></li><br>
+				<li><a class="seccion" href="/charts">Insertar datos para la gráfica</a></li><br>
+				<li><a class="seccion" href="/mostrarcharts">Mostrar datos de la gráfica</a></li><br>
+				<li><a class="seccion" href="/twitter">Twitter</a></li><br>
+				<li><a class="seccion" href="/mashup">Mashup</a></li>
+			</ul>
+			<p id="tit">Historial: </p>
+			<ul>
+				<li><a class="seccion" href="${sesion1}">Última página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion2}">Penúltima página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion3}">Antepenúltima página visitada</a></li>
+			</ul>
+		</section>
+		<section id="rows2">
+			<p id="vis">Nombre de usuario: ${nombre}</p>
+			<p id="vis">Apellidos del usuario: ${apellidos}</p>
+			<p id="vis">DNI del usuario: ${dni}</p>
+			<p id="vis">Correo del usuario: ${correo}</p>
+			<p id="vis">Fecha de nacimiento del usuario: ${nacimiento}</p>
+			<p id="vis">Dirección del usuario: ${direccion}</p>
+			<p id="vis">Contraseña del usuario: ${contrasenia}</p>
+			<p id="vis">Número de la tarjeta VISA del usuario: ${visa}</p>
+			<p id="vis">Forma de pago elegida por el usuario: ${pago}</p>
+		</section>
+		<footer>
+			<p>Nombre del autor: <em>José Manuel Castillo Pérez</em></p>
+			<p>Esta página está registrada bajo licencia GNU GENERAL PUBLIC LICENSE Version 3</p>
+		</footer>
+	</body>
+</html>

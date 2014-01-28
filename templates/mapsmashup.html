@@ -1,0 +1,67 @@
+## -*- coding: utf-8 -*-
+
+<%include file="header.html"/> 
+
+			<p id="formu"><a class="regis" href="/logout"><input type="button" value="Cerrar sesión"/></a></p>
+		</section>
+		<section id="rows1">
+			<p id="tit">Menú de páginas: </p>
+			<ul>
+				<li><a class="seccion" href="/insercion">Registrar usuario</a></li><br>
+				<li><a class="seccion" href="/datos">Visualizar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/modificar">Modificar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/rss">RSS</a></li><br>
+				<li><a class="seccion" href="/maps">Maps</a></li><br>
+				<li><a class="seccion" href="/charts">Insertar datos para la gráfica</a></li><br>
+				<li><a class="seccion" href="/mostrarcharts">Mostrar datos de la gráfica</a></li><br>
+				<li><a class="seccion" href="/twitter">Twitter</a></li><br>
+				<li><a class="seccion" href="/registro">Página Inicial</a></li>
+			</ul>
+			<p id="tit">Historial: </p>
+			<ul>
+				<li><a class="seccion" href="${sesion1}">Última página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion2}">Penúltima página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion3}">Antepenúltima página visitada</a></li>
+			</ul>
+		</section>
+		<section id="rows2">
+		 	<script type="text/javascript"
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC__yeJVFnv9B1DdtiHE06Dc3LV0_G5Yr0&sensor=true">
+			 </script>
+			 <script type="text/javascript">
+				function initialize() {
+					var latitud = ${latitud}
+					var longitud = ${longitud}
+
+				   var mapOptions = {
+				   	center: new google.maps.LatLng(latitud, longitud),
+				   	zoom: 8
+				   };
+				   var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  					var coorMarcador = new google.maps.LatLng(latitud,longitud);
+					var marcador = new google.maps.Marker({                  
+						position: coorMarcador,                 
+						map: map         
+					}); 
+
+ 					var text = "Latitud/Longitud: " + coorMarcador;
+
+				 	var infowindow = new google.maps.InfoWindow({ content: text });
+
+				 	google.maps.event.addListener(marcador, 'click', function() {
+					infowindow.open(map,marcador);
+					});
+				}
+
+				google.maps.event.addDomListener(window, 'load', initialize);
+
+			</script>
+
+			<div id="map-canvas"/>
+		</section>
+		<footer>
+			<p>Nombre del autor: <em>José Manuel Castillo Pérez</em></p>
+			<p>Esta página está registrada bajo licencia GNU GENERAL PUBLIC LICENSE Version 3</p>
+		</footer>
+	</body>
+</html>

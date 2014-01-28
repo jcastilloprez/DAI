@@ -1,0 +1,68 @@
+## -*- coding: utf-8 -*-
+
+<%include file="header.html"/> 
+
+			<p id="formu"><a class="regis" href="/logout"><input type="button" value="Cerrar sesión"/></a></p>
+		</section>
+		<section id="rows1">
+			<p id="tit">Menú de páginas: </p>
+			<ul>
+				<li><a class="seccion" href="/insercion">Registrar Usuario</a></li><br>
+				<li><a class="seccion" href="/datos">Visualizar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/modificar">Modificar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/rss">RSS</a></li><br>
+				<li><a class="seccion" href="/maps">Maps</a></li><br>
+				<li><a class="seccion" href="/charts">Insertar datos para la gráfica</a></li><br>
+				<li><a class="seccion" href="/registro">Página Inicial</a></li><br>
+				<li><a class="seccion" href="/twitter">Twitter</a></li><br>
+				<li><a class="seccion" href="/mashup">Mashup</a></li>
+			</ul>
+			<p id="tit">Historial: </p>
+			<ul>
+				<li><a class="seccion" href="${sesion1}">Última página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion2}">Penúltima página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion3}">Antepenúltima página visitada</a></li>
+			</ul>
+		</section>
+		<section id="rows2">
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    	<script type="text/javascript">
+      	google.load("visualization", "1", {packages:["corechart"]});
+      	google.setOnLoadCallback(drawChart);
+      
+			function drawChart() {
+				var c = ${c}
+				var java = ${java}
+				var small = ${small}
+				var piton = ${piton}
+				var html = ${html}
+				var php = ${php}
+				var j = ${j}
+
+        		var data = google.visualization.arrayToDataTable([
+		      	['Lenguaje', 'Número de usuarios'],
+		       	['C++', c],
+		       	['Java', java],
+		       	['Smalltalk', small],
+		       	['Python', piton],
+					['HTML', html],
+					['PHP', php],
+					['JQuery', j]
+		     	]);
+
+        		var options = {
+          		title: 'Número de usuarios que saben utilizar un determinado lenguaje de programación'
+        		};
+
+        		var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        		chart.draw(data, options);
+      	}
+    </script>
+    		<div id="chart_div" style="width: 100%; height: 500px;"></div>
+		</section>
+		<footer>
+			<p>Nombre del autor: <em>José Manuel Castillo Pérez</em></p>
+			<p>Esta página está registrada bajo licencia GNU GENERAL PUBLIC LICENSE Version 3</p>
+		</footer>
+	</body>
+</html>

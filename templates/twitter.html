@@ -1,0 +1,39 @@
+## -*- coding: utf-8 -*-
+
+<%include file="header.html"/> 
+
+			<p id="formu"><a class="regis" href="/logout"><input type="button" value="Cerrar sesión"/></a></p>
+		</section>
+		<section id="rows1">
+			<p id="tit">Menú de páginas: </p>
+			<ul>
+				<li><a class="seccion" href="/insercion">Registrar usuario</a></li><br>
+				<li><a class="seccion" href="/datos">Visualizar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/modificar">Modificar datos de usuario</a></li><br>
+				<li><a class="seccion" href="/rss">RSS</a></li><br>
+				<li><a class="seccion" href="/maps">Maps</a></li><br>
+				<li><a class="seccion" href="/charts">Insertar datos para la gráfica</a></li><br>
+				<li><a class="seccion" href="/mostrarcharts">Mostrar datos de la gráfica</a></li><br>
+				<li><a class="seccion" href="/registro">Página Inicial</a></li><br>
+				<li><a class="seccion" href="/mashup">Mashup</a></li>
+			</ul>
+			<p id="tit">Historial: </p>
+			<ul>
+				<li><a class="seccion" href="${sesion1}">Última página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion2}">Penúltima página visitada</a></li><br>
+				<li><a class="seccion" href="${sesion3}">Antepenúltima página visitada</a></li>
+			</ul>
+		</section>
+		<section id="rows2">
+			<p id="vis">Contenido del tuit: ${tuit}</p>
+			<p id="vis">Nombre del autor del tuit: ${autor}</p>
+			<p id="vis">Lugar del autor del tuit: ${lugar}</p>
+			<a class="twitter-timeline"  href="https://twitter.com/search?q=%40realmadrid"  data-widget-id="411862984730746880">Tweets sobre "@realmadrid"</a>
+    		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</section>
+		<footer>
+			<p>Nombre del autor: <em>José Manuel Castillo Pérez</em></p>
+			<p>Esta página está registrada bajo licencia GNU GENERAL PUBLIC LICENSE Version 3</p>
+		</footer>
+	</body>
+</html>
